@@ -1,1 +1,0 @@
-cd "$FORNIX_FOLDER/main"
