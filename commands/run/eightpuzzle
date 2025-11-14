@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-cd "$FORNIX_FOLDER/main"
-python eightpuzzle.py "$@"
