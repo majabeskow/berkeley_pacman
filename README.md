@@ -10,7 +10,7 @@ Changes:
 
 # How do I get this code to run?
 
-All the setup instructions are inside [documentation/setup.md](https://github.com/jeff-hykin/berkeley_pacman/blob/master/documentation/setup.md)
+All the setup instructions are inside [documentation/setup.md](./documentation/setup.md)
 
 <br>
 
