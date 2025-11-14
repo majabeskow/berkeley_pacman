@@ -5,14 +5,9 @@ Changes:
 - The casing has been standardized to snake case
 - A light version of wumpus world has been added
 
-
-<br>
-
 # How do I get this code to run?
 
 All the setup instructions are inside [documentation/setup.md](./documentation/setup.md)
-
-<br>
 
 # What are the important files?
 
@@ -20,13 +15,28 @@ All the setup instructions are inside [documentation/setup.md](./documentation/s
 - `main/search.py` is where all your search algorithms should be.<br>(search for `*** YOUR CODE HERE ***`)
 - `main/search_agents.py` is where all of your agents should be.
 
-<br>
 
 # What commands are there?
 
-As soon as you run the start command (from the auto setup in `documentation/setup.md`), it will list all the project commands. But here's a quick overview anyways.
-- `run pacman`
-- `run autograder`
-- `project pacman_examples`
-
-Many of these commands are simple wrappers like `cd ./main;python pacman.py`. You're free to run the python directly if desired.
+    run pacman --layout test_maze --pacman GoWestAgent
+    run pacman --layout tiny_maze --pacman GoWestAgent
+    run pacman --layout tiny_maze -p SearchAgent -a fn=depth_first_search
+    run pacman --layout tiny_maze -p SearchAgent -a fn=uniform_cost_search
+    run pacman -h
+    run pacman -l tiny_maze -p SearchAgent -a fn=tiny_maze_search
+    run pacman -l tiny_maze -p SearchAgent
+    run pacman -l medium_maze -p SearchAgent
+    run pacman -l big_maze -z .5 -p SearchAgent
+    run pacman -l medium_maze -p SearchAgent -a fn=bfs
+    run pacman -l big_maze -p SearchAgent -a fn=bfs -z .5
+    run pacman -l medium_maze -p SearchAgent -a fn=ucs
+    run pacman -l medium_dotted_maze -p StayEastSearchAgent
+    run pacman -l medium_scary_maze -p StayWestSearchAgent
+    run pacman -l big_maze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattan_heuristic 
+    run pacman -l tiny_corners -p SearchAgent -a fn=bfs,prob=CornersProblem
+    run pacman -l medium_corners -p SearchAgent -a fn=bfs,prob=CornersProblem
+    run pacman -l medium_corners -p AStarCornersAgent -z 0.5
+    run pacman -l test_search -p AStarFoodSearchAgent
+    run pacman -l tricky_search -p AStarFoodSearchAgent
+    run pacman -l big_search -p ClosestDotSearchAgent -z .5 
+    run pacman -l big_search -p ApproximateSearchAgent -z .5 -q 
