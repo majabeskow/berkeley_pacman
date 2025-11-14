@@ -1,5 +1,5 @@
 # What is this?
-- This is an updated version (from python2 to python3) of the [Berkeley Pacman](http://ai.berkeley.edu/search.html) project. Its nearly 1-to-1 so you should be able to follow along with their general ideas.
+- This is an updated version (from python2 to python3) of the [Berkeley Pacman](https://inst.eecs.berkeley.edu/~cs188/fa24/projects/) project. Its nearly 1-to-1 so you should be able to follow along with their general ideas.
 Changes:
 - It has been formatted using Black (pypi)
 - The casing has been standardized to snake case
