@@ -19,23 +19,66 @@ Pacman agents (in search_agents.py).
 
 from builtins import object
 import util
-import os
 import heuristics
+from game import Directions
+from tools import Transition
 
 
-def tiny_maze_search(problem):
+class SearchProblem(object):
+    """
+    This class outlines the structure of a search problem, but doesn't implement
+    any of the methods (in object-oriented terminology: an abstract class).
+
+    You do not need to change anything in this class, ever.
+    """
+
+    def get_start_state(self) -> tuple(int,int):
+        """
+        Returns the start state for the search problem.
+        """
+        util.raise_not_defined()
+
+    def is_goal_state(self, state) -> bool:
+        """
+          state: Search state
+
+        Returns True if and only if the state is a valid goal state.
+        """
+        util.raise_not_defined()
+
+    def get_successors(self, state) -> list(Transition):
+        """
+          state: Search state
+
+        For a given state, this should return a list of triples, (successor,
+        action, step_cost), where 'successor' is a successor to the current
+        state, 'action' is the action required to get there, and 'step_cost' is
+        the incremental cost of expanding to that successor.
+        """
+        util.raise_not_defined()
+
+    def get_cost_of_actions(self, actions) -> float:
+        """
+         actions: A list of actions to take
+
+        This method returns the total cost of a particular sequence of actions.
+        The sequence must be composed of legal moves.
+        """
+        util.raise_not_defined()
+
+
+
+def tiny_maze_search(problem: SearchProblem) -> list(Directions):
     """
     Returns a sequence of moves that solves tiny_maze.  For any other maze, the
     sequence of moves will be incorrect, so only use this for tiny_maze.
     """
-    from game import Directions
 
     s = Directions.SOUTH
     w = Directions.WEST
     return [s, s, w, s, w, w, s, w]
 
-
-def example_maze_search(problem):
+def example_maze_search(problem: SearchProblem) -> list(Directions):
     # What does this function need to return?
     #     list of actions (actions shown below) that reaches the goal
     #
@@ -66,8 +109,7 @@ def example_maze_search(problem):
     example_path = [transitions[0].action]
     return example_path
 
-
-def depth_first_search(problem):
+def depth_first_search(problem: SearchProblem) -> list(Directions):
     # Du behöver en datastruktur för att hålla koll på upptäckta noder som du inte än har besökt
     # Du kan använda en Stack som finns i util.py
     # När du gör stack.push(node) läggs en nod till längst upp på stacken
@@ -93,11 +135,11 @@ def depth_first_search(problem):
 
     # t.ex.
 
-    # discovered_paths["b"] = ("a","north")
-    # indikerar att vår dictionary, discovered_paths (som också skulle kunna kallas parents)
+    # discovered_path["b"] = ("a","north")
+    # indikerar att vår dictionary, discovered_path (som också skulle kunna kallas parents)
     # har sparat informationen att för att nå noden "b" så kan vår robot gå "north" från "a"
 
-    discovered_paths = TODO  # skapa en dictionary
+    discovered_path = TODO  # skapa en dictionary
 
     # lägg till startnoden till stacken
     # klassen problem har en funktion för att hämta startnoden.
@@ -111,7 +153,7 @@ def depth_first_search(problem):
 
     # indikera att det inte finns någon nod som används för att ta oss till startnoden
 
-    discovered_paths[TODO] = (
+    discovered_path[TODO] = (
         None,
         None,
     )  # startnoden har alltså ingen (upptäckare,rörelse) tupel
@@ -130,7 +172,7 @@ def depth_first_search(problem):
                     # lägg till grannen som upptäckt
                     discovered.TODO
                     # lägg till vilken nod som upptäckte grannen, och via vilken rörelse
-                    discovered_paths[neighbor] = (node, action)
+                    discovered_path[neighbor] = (node, action)
                     # lägg till grannen på stacken
                     stack.TODO
 
@@ -143,7 +185,7 @@ def depth_first_search(problem):
             # backa hela vägen till starten
             while current is not start:
                 # för varje nod, hämta vilken nod den upptäcktes ifrån och via vilken rörelse
-                parent_node, action = discovered_paths[current]
+                parent_node, action = discovered_path[current]
                 # lägg till "rörelsen" längst fram i den "path" du skapar
                 path.TODO(action)
                 # backa till föregående nod
@@ -154,8 +196,7 @@ def depth_first_search(problem):
     # Sökningen är över utan att en nod upptäckts som är slutnoden
     raise Exception("Failed to find a solution")
 
-
-def breadth_first_search(problem):
+def breadth_first_search(problem: SearchProblem) -> list(Directions):
     # BFS använder en kö (Queue) för att hålla koll på upptäckta noder som vi inte än har besökt.
     # Detta är den stora skillnaden mot DFS!
     # En kö fungerar enligt "först in, först ut"-principen.
@@ -172,9 +213,9 @@ def breadth_first_search(problem):
 
     # Vi behöver också spara vägen. En dictionary är perfekt för detta,
     # där nyckeln är en nod och värdet är en tupel med (föregående_nod, åtgärd).
-    # t.ex. discovered_paths["b"] = ("a", "north")
+    # t.ex. discovered_path["b"] = ("a", "north")
 
-    discovered_paths = TODO  # skapa en dictionary
+    discovered_path = TODO  # skapa en dictionary
 
     # Börja med att lägga till startnoden i kön och markera den som upptäckt.
 
@@ -183,7 +224,7 @@ def breadth_first_search(problem):
     discovered.append(start_node)  # Lägg till i listan över upptäckta
 
     # Startnoden har ingen föregångare.
-    discovered_paths[start_node] = (None, None)
+    discovered_path[start_node] = (None, None)
 
     # Sökningen fortsätter så länge det finns noder kvar att besöka i kön.
     while not queue.is_empty():
@@ -198,7 +239,7 @@ def breadth_first_search(problem):
 
             # Backa från målnoden till startnoden med hjälp av vår dictionary.
             while current != start_node:
-                parent_node, action = discovered_paths[current]
+                parent_node, action = discovered_path[current]
                 # Lägg till varje åtgärd i början av listan för att få rätt ordning.
                 path.insert(0, action)
                 current = parent_node
@@ -213,15 +254,14 @@ def breadth_first_search(problem):
                 # 1. Markera den som upptäckt.
                 discovered.append(neighbor)
                 # 2. Spara hur vi kom hit (från vilken nod och med vilken åtgärd).
-                discovered_paths[neighbor] = (node, action)
+                discovered_path[neighbor] = (node, action)
                 # 3. Lägg till den sist i kön för att besöka den senare.
                 queue.push(neighbor)
 
     # Sökningen är över utan att en nod upptäckts som är slutnoden
     raise Exception("Failed to find a solution")
 
-
-def uniform_cost_search(problem):
+def uniform_cost_search(problem: SearchProblem) -> list(Directions):
     # UCS använder en prioritetskö (Priority Queue) för att alltid utforska
     # den billigaste vägen först.
     # När du gör pq.push(item, priority) läggs ett objekt till med en viss prioritet (kostnad).
@@ -235,7 +275,7 @@ def uniform_cost_search(problem):
     discovered = TODO  # skapa en dictionary
 
     # Precis som tidigare sparar vi vägen i en separat dictionary.
-    discovered_paths = TODO  # skapa en dictionary
+    discovered_path = TODO  # skapa en dictionary
 
     # Vi behöver också hålla koll på besökta noder.
     # Algoritmen garanterar att första gången en nod besöks är det via
@@ -258,7 +298,7 @@ def uniform_cost_search(problem):
     discovered[start_node] = TODO
 
     # Samma som tidigare, startnoden har ingen "upptäckare"
-    discovered_paths[start_node] = (None, None)
+    discovered_path[start_node] = (None, None)
 
     while not priority_queue.is_empty():
         # Hämta ut noden med lägst total kostnad hittills.
@@ -279,7 +319,7 @@ def uniform_cost_search(problem):
             path = []
             current = node
             while current != start_node:
-                parent_node, action = discovered_paths[current]
+                parent_node, action = discovered_path[current]
                 path.insert(0, action)
                 current = parent_node
             return path
@@ -294,15 +334,14 @@ def uniform_cost_search(problem):
                 # 1. Spara (eller uppdatera) den billigaste kostnaden till grannen.
                 discovered[neighbor] = TODO
                 # 2. Spara (eller uppdatera) vägen till grannen.
-                discovered_paths[neighbor] = TODO
+                discovered_path[neighbor] = TODO
                 # 3. Lägg till grannen i prioritetskön med den nya, låga kostnaden som prioritet.
                 priority_queue.push(TODO)
 
     # Sökningen är över utan att en nod upptäckts som är slutnoden
     raise Exception("Failed to find a solution")
 
-
-def a_star_search(problem, heuristic=heuristics.your_heuristic):
+def a_star_search(problem : SearchProblem, heuristic=heuristics.your_heuristic) -> list(Directions):
     # A* använder också en prioritetskö, precis som UCS.
     # Skillnaden är hur vi beräknar prioriteten för varje nod.
     # sökningen använder en funktion som argument (ovan "heuristic")
@@ -316,7 +355,7 @@ def a_star_search(problem, heuristic=heuristics.your_heuristic):
     g_cost = TODO  # skapa en dictionary
 
     # Precis som tidigare sparar vi vägen för att kunna återskapa den på slutet.
-    discovered_paths = TODO  # skapa en dictionary
+    discovered_path = TODO  # skapa en dictionary
 
     # Vi behöver också hålla koll på noder vi redan har besökt,
     # för att inte göra dubbelarbete, på samma sätt som i UCS
@@ -326,7 +365,7 @@ def a_star_search(problem, heuristic=heuristics.your_heuristic):
     start_node = problem.get_start_state()
 
     # Startnoden har ingen "upptäckare".
-    discovered_paths[start_node] = (None, None)
+    discovered_path[start_node] = (None, None)
 
     # Vad är kostnaden (g-värdet) att nå startnoden från sig själv?
     g_cost[start_node] = TODO
@@ -361,7 +400,7 @@ def a_star_search(problem, heuristic=heuristics.your_heuristic):
             # backa hela vägen till starten
             while current != start_node:
                 # för varje nod, hämta vilken nod den upptäcktes ifrån och via vilken rörelse
-                parent_node, action = discovered_paths[current]
+                parent_node, action = discovered_path[current]
                 # lägg till "rörelsen" längst fram i den "path" du skapar
                 path.insert(0, action)
                 # backa till föregående nod
@@ -381,7 +420,7 @@ def a_star_search(problem, heuristic=heuristics.your_heuristic):
                 g_cost[neighbor] = new_g_cost
 
                 # 2. Spara (eller uppdatera) vägen som ledde hit.
-                discovered_paths[neighbor] = (TODO, TODO)
+                discovered_path[neighbor] = (TODO, TODO)
 
                 # 3. Beräkna det nya f-värdet för grannen.
                 new_h_value = heuristic(TODO, problem)
@@ -392,67 +431,6 @@ def a_star_search(problem, heuristic=heuristics.your_heuristic):
     # Sökningen är över utan att en nod upptäckts som är slutnoden
     raise Exception("Failed to find a solution")
 
-
-# (you can ignore this, although it might be helpful to know about)
-# This is effectively an abstract class
-# it should give you an idea of what methods will be available on problem-objects
-class SearchProblem(object):
-    """
-    This class outlines the structure of a search problem, but doesn't implement
-    any of the methods (in object-oriented terminology: an abstract class).
-
-    You do not need to change anything in this class, ever.
-    """
-
-    def get_start_state(self):
-        """
-        Returns the start state for the search problem.
-        """
-        util.raise_not_defined()
-
-    def is_goal_state(self, state):
-        """
-          state: Search state
-
-        Returns True if and only if the state is a valid goal state.
-        """
-        util.raise_not_defined()
-
-    def get_successors(self, state):
-        """
-          state: Search state
-
-        For a given state, this should return a list of triples, (successor,
-        action, step_cost), where 'successor' is a successor to the current
-        state, 'action' is the action required to get there, and 'step_cost' is
-        the incremental cost of expanding to that successor.
-        """
-        util.raise_not_defined()
-
-    def get_cost_of_actions(self, actions):
-        """
-         actions: A list of actions to take
-
-        This method returns the total cost of a particular sequence of actions.
-        The sequence must be composed of legal moves.
-        """
-        util.raise_not_defined()
-
-
-if os.path.exists("./hidden/search.py"):
-    from hidden.search import *
-# fallback on a_star_search
-for function in [
-    breadth_first_search,
-    depth_first_search,
-    uniform_cost_search,
-]:
-    try:
-        function(None)
-    except util.NotDefined as error:
-        exec(f"{function.__name__} = a_star_search", globals(), globals())
-    except:
-        pass
 
 # Abbreviations
 bfs = breadth_first_search

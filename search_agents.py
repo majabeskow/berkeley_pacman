@@ -460,7 +460,7 @@ class FoodSearchProblem(object):
 
     def __init__(self, starting_game_state):
         self.start = (
-            starting_game_state.get_pacman_position(),
+            starting_game_state.get_pacma_position(),
             starting_game_state.get_food(),
         )
         self.walls = starting_game_state.get_walls()
