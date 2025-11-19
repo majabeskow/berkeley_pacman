@@ -18,25 +18,26 @@ All the setup instructions are inside [documentation/setup.md](./documentation/s
 
 # What commands are there?
 
-    run pacman --layout test_maze --pacman GoWestAgent
-    run pacman --layout tiny_maze --pacman GoWestAgent
-    run pacman --layout tiny_maze -p SearchAgent -a fn=depth_first_search
-    run pacman --layout tiny_maze -p SearchAgent -a fn=uniform_cost_search
-    run pacman -h
-    run pacman -l tiny_maze -p SearchAgent -a fn=tiny_maze_search
-    run pacman -l tiny_maze -p SearchAgent
-    run pacman -l medium_maze -p SearchAgent
-    run pacman -l big_maze -z .5 -p SearchAgent
-    run pacman -l medium_maze -p SearchAgent -a fn=bfs
-    run pacman -l big_maze -p SearchAgent -a fn=bfs -z .5
-    run pacman -l medium_maze -p SearchAgent -a fn=ucs
-    run pacman -l medium_dotted_maze -p StayEastSearchAgent
-    run pacman -l medium_scary_maze -p StayWestSearchAgent
-    run pacman -l big_maze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattan_heuristic 
-    run pacman -l tiny_corners -p SearchAgent -a fn=bfs,prob=CornersProblem
-    run pacman -l medium_corners -p SearchAgent -a fn=bfs,prob=CornersProblem
-    run pacman -l medium_corners -p AStarCornersAgent -z 0.5
-    run pacman -l test_search -p AStarFoodSearchAgent
-    run pacman -l tricky_search -p AStarFoodSearchAgent
-    run pacman -l big_search -p ClosestDotSearchAgent -z .5 
-    run pacman -l big_search -p ApproximateSearchAgent -z .5 -q 
+    python pacman.py
+    python pacman.py -h
+    python pacman.py -l tiny_maze -p SearchAgent -a fn=tiny_maze_search
+    python pacman.py -l tiny_maze -p SearchAgent -a fn=depth_first_search
+    python pacman.py -l medium_maze -p SearchAgent -a fn=bfs
+    python pacman.py -l tiny_maze -p SearchAgent -a fn=uniform_cost_search
+    python pacman.py -l test_maze --pacman GoWestAgent
+    python pacman.py -l tiny_maze --pacman GoWestAgent
+    python pacman.py -l big_maze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattan_heuristic 
+    python pacman.py -l tiny_corners -p SearchAgent -a fn=bfs,prob=CornersProblem
+    python pacman.py -l medium_corners -p SearchAgent -a fn=bfs,prob=CornersProblem
+    python pacman.py -l tiny_maze -p SearchAgent
+    python pacman.py -l medium_maze -p SearchAgent
+    python pacman.py -l big_maze -z .5 -p SearchAgent
+    python pacman.py -l big_maze -p SearchAgent -a fn=bfs -z .5
+    python pacman.py -l medium_maze -p SearchAgent -a fn=ucs
+    python pacman.py -l medium_dotted_maze -p StayEastSearchAgent
+    python pacman.py -l medium_scary_maze -p StayWestSearchAgent
+    python pacman.py -l medium_corners -p AStarCornersAgent -z 0.5
+    python pacman.py -l test_search -p AStarFoodSearchAgent
+    python pacman.py -l tricky_search -p AStarFoodSearchAgent
+    python pacman.py -l big_search -p ClosestDotSearchAgent -z .5 
+    python pacman.py -l big_search -p ApproximateSearchAgent -z .5 -q 
