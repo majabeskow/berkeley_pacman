@@ -1,6 +1,21 @@
+# Updated version of [Jeff Hykins updated version of Berkeley Pacman](https://github.com/jeff-hykin/berkeley_pacman)
+
+To be used by students at Maja Beskowgymnasiet
+
+changes:
+
+- added types to classes used.
+- simplified project structure
+- head start with TODO annotations for implementation details
+
+**Attached below README from OG fork.**
+
+---
+
 # What is this?
+
 - This is an updated version (from python2 to python3) of the [Berkeley Pacman](https://inst.eecs.berkeley.edu/~cs188/fa24/projects/) project. Its nearly 1-to-1 so you should be able to follow along with their general ideas.
-Changes:
+  Changes:
 - It has been formatted using Black (pypi)
 - The casing has been standardized to snake case
 - A light version of wumpus world has been added
@@ -15,7 +30,6 @@ All the setup instructions are inside [documentation/setup.md](./documentation/s
 - `main/search.py` is where all your search algorithms should be.<br>(search for `*** YOUR CODE HERE ***`)
 - `main/search_agents.py` is where all of your agents should be.
 
-
 # What commands are there?
 
     python pacman.py
@@ -26,7 +40,7 @@ All the setup instructions are inside [documentation/setup.md](./documentation/s
     python pacman.py -l tiny_maze -p SearchAgent -a fn=uniform_cost_search
     python pacman.py -l test_maze --pacman GoWestAgent
     python pacman.py -l tiny_maze --pacman GoWestAgent
-    python pacman.py -l big_maze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattan_heuristic 
+    python pacman.py -l big_maze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattan_heuristic
     python pacman.py -l tiny_corners -p SearchAgent -a fn=bfs,prob=CornersProblem
     python pacman.py -l medium_corners -p SearchAgent -a fn=bfs,prob=CornersProblem
     python pacman.py -l tiny_maze -p SearchAgent
@@ -39,5 +53,5 @@ All the setup instructions are inside [documentation/setup.md](./documentation/s
     python pacman.py -l medium_corners -p AStarCornersAgent -z 0.5
     python pacman.py -l test_search -p AStarFoodSearchAgent
     python pacman.py -l tricky_search -p AStarFoodSearchAgent
-    python pacman.py -l big_search -p ClosestDotSearchAgent -z .5 
-    python pacman.py -l big_search -p ApproximateSearchAgent -z .5 -q 
+    python pacman.py -l big_search -p ClosestDotSearchAgent -z .5
+    python pacman.py -l big_search -p ApproximateSearchAgent -z .5 -q
