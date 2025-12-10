@@ -12,16 +12,27 @@
 # Pieter Abbeel (pabbeel@cs.berkeley.edu).
 
 
+
+
 """
 In search.py, you will implement generic search algorithms which are called by
 Pacman agents (in search_agents.py).
 """
 
 from builtins import object
+from game import Directions
 import util
 import heuristics
-from game import Directions
-from tools import Transition
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from typing import NamedTuple
+    class Transition(NamedTuple):
+        state: tuple[int,int]
+        action: str
+        cost: float
+
 
 
 class SearchProblem(object):
@@ -32,13 +43,14 @@ class SearchProblem(object):
     You do not need to change anything in this class, ever.
     """
 
-    def get_start_state(self) -> tuple(int,int):
+    def get_start_state(self) -> tuple[int,int]:
         """
         Returns the start state for the search problem.
         """
         util.raise_not_defined()
-
-    def is_goal_state(self, state) -> bool:
+        return (0, 0)
+   
+    def is_goal_state(self, state: tuple[int,int]) -> bool:
         """
           state: Search state
 
@@ -46,7 +58,7 @@ class SearchProblem(object):
         """
         util.raise_not_defined()
 
-    def get_successors(self, state) -> list(Transition):
+    def get_successors(self, state: tuple[int,int]) -> list[Transition]:
         """
           state: Search state
 
@@ -57,7 +69,7 @@ class SearchProblem(object):
         """
         util.raise_not_defined()
 
-    def get_cost_of_actions(self, actions) -> float:
+    def get_cost_of_actions(self, actions:list[str]) -> float:
         """
          actions: A list of actions to take
 
@@ -68,7 +80,7 @@ class SearchProblem(object):
 
 
 
-def tiny_maze_search(problem: SearchProblem) -> list(Directions):
+def tiny_maze_search(problem: SearchProblem) -> list[str]:
     """
     Returns a sequence of moves that solves tiny_maze.  For any other maze, the
     sequence of moves will be incorrect, so only use this for tiny_maze.
@@ -78,7 +90,7 @@ def tiny_maze_search(problem: SearchProblem) -> list(Directions):
     w = Directions.WEST
     return [s, s, w, s, w, w, s, w]
 
-def example_maze_search(problem: SearchProblem) -> list(Directions):
+def example_maze_search(problem: SearchProblem) -> list[str]:
     # What does this function need to return?
     #     list of actions (actions shown below) that reaches the goal
     #
@@ -109,7 +121,7 @@ def example_maze_search(problem: SearchProblem) -> list(Directions):
     example_path = [transitions[0].action]
     return example_path
 
-def depth_first_search(problem: SearchProblem) -> list(Directions):
+def depth_first_search(problem: SearchProblem) -> list[str]:
     # Du behöver en datastruktur för att hålla koll på upptäckta noder som du inte än har besökt
     # Du kan använda en Stack som finns i util.py
     # När du gör stack.push(node) läggs en nod till längst upp på stacken
@@ -196,7 +208,7 @@ def depth_first_search(problem: SearchProblem) -> list(Directions):
     # Sökningen är över utan att en nod upptäckts som är slutnoden
     raise Exception("Failed to find a solution")
 
-def breadth_first_search(problem: SearchProblem) -> list(Directions):
+def breadth_first_search(problem: SearchProblem) -> list[str]:
     # BFS använder en kö (Queue) för att hålla koll på upptäckta noder som vi inte än har besökt.
     # Detta är den stora skillnaden mot DFS!
     # En kö fungerar enligt "först in, först ut"-principen.
@@ -261,7 +273,7 @@ def breadth_first_search(problem: SearchProblem) -> list(Directions):
     # Sökningen är över utan att en nod upptäckts som är slutnoden
     raise Exception("Failed to find a solution")
 
-def uniform_cost_search(problem: SearchProblem) -> list(Directions):
+def uniform_cost_search(problem: SearchProblem) -> list[str]:
     # UCS använder en prioritetskö (Priority Queue) för att alltid utforska
     # den billigaste vägen först.
     # När du gör pq.push(item, priority) läggs ett objekt till med en viss prioritet (kostnad).
@@ -341,7 +353,7 @@ def uniform_cost_search(problem: SearchProblem) -> list(Directions):
     # Sökningen är över utan att en nod upptäckts som är slutnoden
     raise Exception("Failed to find a solution")
 
-def a_star_search(problem : SearchProblem, heuristic=heuristics.your_heuristic) -> list(Directions):
+def a_star_search(problem : SearchProblem, heuristic=heuristics.your_heuristic) -> list[str]:
     # A* använder också en prioritetskö, precis som UCS.
     # Skillnaden är hur vi beräknar prioriteten för varje nod.
     # sökningen använder en funktion som argument (ovan "heuristic")
