@@ -175,7 +175,8 @@ def depth_first_search(problem: SearchProblem) -> list[str]:
         node = TODO  # hämta ut senaste tillagda noden på stacken (SÅ FUNGERAR DFS!)
 
         # utforska grannar om vi inte nått målet
-        if node is not goal:
+        # använd hjälpmetoden i "problem" för att avgöra om du nått målet
+        if not problem.TODO:
             # för varje hittad granne, hitta:
             # namnet på grannen, rörelsen för att ta sig dit, kostnaden att ta sig dit
             # Kolla på klassen SearchProblem.
