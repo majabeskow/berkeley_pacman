@@ -170,7 +170,7 @@ def depth_first_search(problem: SearchProblem) -> list[str]:
         None,
     )  # startnoden har alltså ingen (upptäckare,rörelse) tupel
 
-    while stack.is_empty() != TODO: # Hur länge ska loopen köras?  
+    while not stack.TODO: # Kör så länge det finns något på stacken
         
         node = TODO  # hämta ut senaste tillagda noden på stacken (SÅ FUNGERAR DFS!)
 
