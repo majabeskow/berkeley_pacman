@@ -127,14 +127,14 @@ def depth_first_search(problem: SearchProblem) -> list[str]:
     # När du gör stack.push(node) läggs en nod till längst upp på stacken
     # När du gör node = stack.pop() plockar du ut den senaste tillagda noden
 
-    stack = TODO  # skapa en util.Stack()
+    stack = util.Stack()  # skapa klassen Stack i filen python
 
     # Du behöver en datastruktur för att hålla koll på redan upptäckta noder
     # så att du inte lägger till samma nod flera gånger. Du kan använda lista eller set.
     # lista ut hur man gör en lista i python
     # ... hehehe
 
-    discovered = TODO  # skapa en lista
+    discovered = TODO  # skapa en tom lista
 
     # För att hålla koll på vilken väg din sökning tog behöver du alltså spara undan
     # för varje nod, vem som upptäckte den och vilken rörelse som rör roboten från
@@ -151,7 +151,7 @@ def depth_first_search(problem: SearchProblem) -> list[str]:
     # indikerar att vår dictionary, discovered_path (som också skulle kunna kallas parents)
     # har sparat informationen att för att nå noden "b" så kan vår robot gå "north" från "a"
 
-    discovered_path = TODO  # skapa en dictionary
+    discovered_path = TODO  # skapa en tom dictionary
 
     # lägg till startnoden till stacken
     # klassen problem har en funktion för att hämta startnoden.
@@ -170,7 +170,8 @@ def depth_first_search(problem: SearchProblem) -> list[str]:
         None,
     )  # startnoden har alltså ingen (upptäckare,rörelse) tupel
 
-    while stack is not empty:  # TODO kolla i util.py vilka funktioner stack har.
+    while stack.is_empty() != TODO: # Hur länge ska loopen köras?  
+        
         node = TODO  # hämta ut senaste tillagda noden på stacken (SÅ FUNGERAR DFS!)
 
         # utforska grannar om vi inte nått målet
